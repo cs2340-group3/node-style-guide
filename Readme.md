@@ -31,7 +31,7 @@ according to your preferences.
 * [Use UPPERCASE for Constants](#use-uppercase-for-constants)
 * [Object / Array creation](#object--array-creation)
 * [Use the === operator](#use-the--operator)
-* [Use multi-line ternary operator](#use-multi-line-ternary-operator)
+* [Split long ternary operator expressions](#split-long-ternary-operator-expressions)
 * [Use slashes for comments](#use-slashes-for-comments)
 * [Object.freeze, Object.preventExtensions, Object.seal, with, eval](#objectfreeze-objectpreventextensions-objectseal-with-eval)
 * [Getters and setters](#getters-and-setters)
@@ -306,11 +306,24 @@ if (a == '') {
 
 [comparisonoperators]: https://developer.mozilla.org/en/JavaScript/Reference/Operators/Comparison_Operators
 
-## Use multi-line ternary operator
+## Split long ternary operator expressions
 
-The ternary operator should not be used on a single line. Split it up into multiple lines instead.
+The ternary operator should only be used on a single line if the expression is short. Split it up into
+multiple lines otherwise.
 
 *Right:*
+
+```js
+var foo = (a === b) ? 1 : 2;
+```
+
+```js
+var foo = (someObject.someLongerProperty === somethingElse)
+  ? objectB.otherProperty()
+  : objectC.someOtherOtherProperty();
+```
+
+*Wrong:*
 
 ```js
 var foo = (a === b)
@@ -318,10 +331,8 @@ var foo = (a === b)
   : 2;
 ```
 
-*Wrong:*
-
 ```js
-var foo = (a === b) ? 1 : 2;
+var foo = (someObject.someLongerProperty === somethingElse) ? objectB.otherProperty() : objectC.someOtherOtherProperty();
 ```
 
 ## Do not extend built-in prototypes
